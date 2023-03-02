@@ -1,0 +1,63 @@
+{%  extends 'layout.html' %}
+
+{% block content %}
+
+<h1>Update Post</h1>
+<div>
+	<!-- post on the same route with empty action -->
+	<form action="/posts/update/{{post.id}}" method="POST">
+		<!-- hidden tag is like csrf token for protection -->
+		{{ form.hidden_tag() }}
+		<fieldset class="form-group">
+			<div class="form-group">
+				{{ form.title.label(class="form-control-label") }}
+
+				<!-- if data not valid , display errors -->
+				{% if form.title.errors %}
+					{{ form.title(class="form-control is-invalid" ,value=post.title) }}
+					<div class="invalid-feedback">
+						{% for error in form.title.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.title(class="form-control",value=post.title) }}
+				{% endif %}
+			</div>
+			<div class="form-group">
+				{{ form.content.label(class="form-control-label") }}
+
+				<!-- if data not valid , display errors -->
+				{% if form.content.errors %}
+					{{ form.content(class="form-control is-invalid",value=post.content) }}
+					<div class="invalid-feedback">
+						{% for error in form.content.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.content(class="form-control",value=post.content) }}
+				{% endif %}
+			</div>
+			<div class="form-group">
+				{{ form.privacy.label(class="form-control-label") }}
+
+				<!-- if data not valid , display errors -->
+				{% if form.privacy.errors %}
+					{{ form.privacy(class="form-control is-invalid",value=post.privacy) }}
+					<div class="invalid-feedback">
+						{% for error in form.privacy.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.privacy(class="form-control",value=post.privacy) }}
+				{% endif %}
+			</div>
+			<div class="form-group">
+				{{ form.submit(class="btn btn-outline-info") }}
+			</div>
+		</fieldset>
+	</form>
+</div>
+{% endblock %}

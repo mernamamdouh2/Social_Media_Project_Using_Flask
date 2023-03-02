@@ -1,0 +1,75 @@
+{%  extends 'layout.html' %}
+
+{% block content %}
+<h1>Profile</h1>
+<p>Welcome to your profile page! Here you can view your posts, update your info, delete your posts and add friends.</p>
+<ul>
+    <li><a href="/update">Update Your Info</a></li>
+</ul>
+
+{% for post in posts %}
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+	<a href="/posts/update/{{post.id}}">Update Posts</a>
+    <a href="/posts/delete/{{post.id}}">Delete Posts</a>
+{% endfor %}
+
+<h1>Create Post</h1>
+<div>
+	<!-- post on the same route with empty action -->
+	<form action="/create_post" method="POST">
+		<!-- hidden tag is like csrf token for protection -->
+		{{ form.hidden_tag() }}
+		<fieldset class="form-group">
+			<div class="form-group">
+				{{ form.title.label(class="form-control-label") }}
+
+				<!-- if data not valid , display errors -->
+				{% if form.title.errors %}
+					{{ form.title(class="form-control is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.title.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.title(class="form-control") }}
+				{% endif %}
+			</div>
+			<div class="form-group">
+				{{ form.content.label(class="form-control-label") }}
+
+				<!-- if data not valid , display errors -->
+				{% if form.content.errors %}
+					{{ form.content(class="form-control is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.content.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.content(class="form-control") }}
+				{% endif %}
+			</div>
+			<div class="form-group">
+				{{ form.privacy.label(class="form-control-label") }}
+
+				<!-- if data not valid , display errors -->
+				{% if form.privacy.errors %}
+					{{ form.privacy(class="form-control is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.privacy.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.privacy(class="form-control") }}
+				{% endif %}
+			</div>
+			<div class="form-group">
+				{{ form.submit(class="btn btn-outline-info") }}
+			</div>
+		</fieldset>
+	</form>
+</div>
+{% endblock %}

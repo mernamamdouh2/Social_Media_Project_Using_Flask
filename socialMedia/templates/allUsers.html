@@ -1,0 +1,24 @@
+{%  extends 'layout.html' %}
+
+{% block content %}
+
+<h1>All Users</h1>
+
+{% for user in allUsers %}
+    {% if user.id in friends %}
+        <h2>{{ user.username }}</h2>
+        <p>**Friend**</p>
+    {% elif user.id in friends_requestRecieved %}
+        <h2>{{ user.username }}</h2>
+        <a href="/accept_request/{{user.id}}">Accept</a>
+        <a href="/reject_request/{{user.id}}">Reject</a>
+    {% elif user.id in friends_requestSended %}
+        <h2>{{ user.username }}</h2>
+        <p>Pending....</p>
+    {% else %}
+        <h2>{{ user.username }}</h2>
+        <a href="/makeFriendRequest/{{user.id}}">Add Friend</a>
+    {% endif %}
+{% endfor %}
+
+{% endblock %}

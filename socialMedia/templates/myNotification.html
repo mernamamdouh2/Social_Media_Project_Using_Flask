@@ -1,0 +1,16 @@
+{%  extends 'layout.html' %}
+
+{% block content %}
+
+<h1>My Notifications</h1>
+
+{% for notification in notifications %}
+    <h2>{{ notification.message }}</h2>
+    {% if notification.seen %}
+
+    {% else %}
+        <a href="/seenNotification/{{notification.id}}">Seen</a>
+    {% endif %}    
+{% endfor %}
+
+{% endblock %}

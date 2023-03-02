@@ -1,0 +1,26 @@
+{%  extends 'layout.html' %}
+
+{% block content %}
+ <!-- Home Page -->
+<h1>Home</h1>
+<p>Welcome to the home page of our social network! Here you can view posts from your friends and other users, as well as post your own posts.</p>
+{% if current_user.is_authenticated %}
+    <form action="" method="POST">
+        <!-- hidden tag is like csrf token for protection -->
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <label>friends only mode</label>
+            <input type="checkbox" name="friends_only_mode" value="1"/>
+            <input type="submit" value="Search"/>
+        </fieldset>
+    </form>
+{% endif %}
+
+
+{% for post in posts %}
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+
+{% endfor %}
+
+{% endblock %}

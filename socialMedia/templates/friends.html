@@ -1,0 +1,11 @@
+{%  extends 'layout.html' %}
+
+{% block content %}
+    <h1>My Friends</h1>
+    <p>On this page you can view all of your friend requests, accept or decline them and view notifications for when your requests have been accepted or declined.</p>
+
+    {% for friend in friends %}
+        <h2>{{ friend.username }}</h2>
+    {% endfor %}
+    
+{% endblock %}

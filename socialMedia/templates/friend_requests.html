@@ -1,0 +1,13 @@
+{%  extends 'layout.html' %}
+
+{% block content %}
+
+<h1>Friend Requests</h1>
+
+{% for user in requests %}
+    <h2>{{ user.username }}</h2>
+    <a href="/accept_request/{{user.id}}">Accept</a>
+    <a href="/reject_request/{{user.id}}">Reject</a>
+{% endfor %}
+
+{% endblock %}
